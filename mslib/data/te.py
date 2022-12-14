@@ -15,7 +15,7 @@ TICKER_MAP = {
 
 def _get_auth_token(auth_url):
     full_auth_url = 'https://tradingeconomics.com' + auth_url
-    print(full_auth_url)
+    # print(full_auth_url)
 
     r = requests.get(full_auth_url, headers=USER_AGENT)
     auth_token = r.text.split("""    TESecurify = """)[1][:100].split('\'')[1]
@@ -37,13 +37,16 @@ def _get_data(s, auth_url, auth_token, span=None, d1=None, d2=None, interval=Non
     data_url += f'url={auth_url}&'
     data_url += f'AUTH={auth_token}&'
     data_url += f'ohlc=0'
-    
+
     # print(data_url)
 
     r = requests.get(data_url, headers=USER_AGENT)
-    df = pd.DataFrame.from_dict(r.json()['series'][0]['data'])
+    data = pd.DataFrame.from_dict(r.json()['series'][0]['data'])
+
+    data.date = pd.to_datetime(data.date)
+    data = data.set_index('date').loc[:, ['y']].rename(columns={'y': 'close'})
     
-    return df
+    return data
 
 # %% ../../nbs/data/te.ipynb 3
 def get_data(ticker):
