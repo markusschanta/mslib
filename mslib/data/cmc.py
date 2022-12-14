@@ -10,6 +10,7 @@ import time
 import pandas as pd
 import requests
 
+# %% ../../nbs/data/cmc.ipynb 3
 def get_coin_list():
     list_url = "https://s2.coinmarketcap.com/generated/search/quick_search.json"
     data = requests.get(list_url).json()
