@@ -5,4 +5,5 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://markusschanta.github.io',
                 'git_url': 'https://github.com/markusschanta/mslib',
                 'lib_path': 'mslib'},
-  'syms': {'mslib.core': {'mslib.core.foo': ('core.html#foo', 'mslib/core.py')}}}
+  'syms': { 'mslib.core': {'mslib.core.foo': ('core.html#foo', 'mslib/core.py')},
+            'mslib.data.cmc': {'mslib.data.cmc.get_coin_list': ('data/cmc.html#get_coin_list', 'mslib/data/cmc.py')}}}
