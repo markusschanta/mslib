@@ -6,4 +6,7 @@ d = { 'settings': { 'branch': 'main',
                 'git_url': 'https://github.com/markusschanta/mslib',
                 'lib_path': 'mslib'},
   'syms': { 'mslib.core': {'mslib.core.foo': ('core.html#foo', 'mslib/core.py')},
-            'mslib.data.cmc': {'mslib.data.cmc.get_coin_list': ('data/cmc.html#get_coin_list', 'mslib/data/cmc.py')}}}
+            'mslib.data.cmc': {'mslib.data.cmc.get_coin_list': ('data/cmc.html#get_coin_list', 'mslib/data/cmc.py')},
+            'mslib.data.te': { 'mslib.data.te._get_auth_token': ('data/te.html#_get_auth_token', 'mslib/data/te.py'),
+                               'mslib.data.te._get_data': ('data/te.html#_get_data', 'mslib/data/te.py'),
+                               'mslib.data.te.get_data': ('data/te.html#get_data', 'mslib/data/te.py')}}}
