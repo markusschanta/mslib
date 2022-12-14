@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "mslib"
+  site-url: "https://markusschanta.github.io/mslib"
+  description: "mslib"
+  repo-branch: main
+  repo-url: "https://github.com/markusschanta/mslib"
