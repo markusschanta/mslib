@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "mslib",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "mslib",
+    "section": "Install",
+    "text": "Install\npip install mslib"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "mslib",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2"
+  },
+  {
+    "objectID": "data/cmc.html",
+    "href": "data/cmc.html",
+    "title": "cmc",
+    "section": "",
+    "text": "source\n\nget_coin_list\n\n get_coin_list ()\n\n\nget_coin_list()\n\n\n\n\n\n  \n    \n      \n      slug\n      symbol\n      name\n    \n    \n      rank\n      \n      \n      \n    \n  \n  \n    \n      1\n      bitcoin\n      BTC\n      Bitcoin\n    \n    \n      2\n      ethereum\n      ETH\n      Ethereum\n    \n    \n      3\n      tether\n      USDT\n      Tether\n    \n    \n      4\n      xrp\n      XRP\n      XRP\n    \n    \n      5\n      bitcoin-cash\n      BCH\n      Bitcoin Cash\n    \n    \n      ...\n      ...\n      ...\n      ...\n    \n    \n      6364\n      e-money-coin\n      NMG\n      e-Money\n    \n    \n      6365\n      arth\n      ARTH\n      ARTH\n    \n    \n      6366\n      golden-goose\n      GOLD\n      Golden Goose\n    \n    \n      6367\n      koinos\n      KOIN\n      Koinos\n    \n    \n      6368\n      staysbase\n      SBS\n      StaysBASE\n    \n  \n\n6368 rows × 3 columns\n\n\n\n\ndef get_market_data_single(slug, resample='d'):\n    market_data_url = \"https://graphs2.coinmarketcap.com/currencies/%s/\" % slug\n    print(\"Fetching market data for: %s\" % slug)\n    time.sleep(1.5)\n    data = requests.get(market_data_url).json()\n    market_data = pd.concat({k: pd.Series(dict(v)) for k, v in data.items()}, axis=1)\n    market_data.index = pd.to_datetime(list(market_data.index),unit='ms')\n    if resample:\n        market_data = market_data.resample(resample).last()\n    return market_data\n\ndef get_market_data(slugs=None, n=10):\n    if slugs != None:\n        n = len(slugs)\n    else:\n        slugs = get_coin_list().slug.iloc[:n]\n\n    market_data = {c: get_market_data_single(c) for c in slugs}\n    market_data = pd.concat(market_data, axis=1, names=['slug', 'metric'])\n    return market_data"
+  },
+  {
+    "objectID": "data/te.html",
+    "href": "data/te.html",
+    "title": "te",
+    "section": "",
+    "text": "source\n\nget_data\n\n get_data (ticker)\n\n\nget_data('spx:ind')\n\n\n\n\n\n  \n    \n      \n      close\n    \n    \n      date\n      \n    \n  \n  \n    \n      1928-01-03\n      17.57000\n    \n    \n      1928-02-01\n      17.26000\n    \n    \n      1928-03-01\n      19.13000\n    \n    \n      1928-04-02\n      19.75000\n    \n    \n      1928-05-01\n      20.00000\n    \n    \n      ...\n      ...\n    \n    \n      2022-08-01\n      3955.00000\n    \n    \n      2022-09-01\n      3585.62000\n    \n    \n      2022-10-03\n      3871.98000\n    \n    \n      2022-11-01\n      4080.11000\n    \n    \n      2022-12-01\n      4047.02002\n    \n  \n\n1140 rows × 1 columns\n\n\n\n\nget_data('spx:ind').plot()\n\n<AxesSubplot: xlabel='date'>\n\n\n\n\n\n\n# s='foo:ind'\n# auth_url='/spx:ind'\n\n# auth_token =_get_auth_token(auth_url)\n# df = _get_data(s, auth_url, auth_token)\n\n# df.date"
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()"
+  }
+]
