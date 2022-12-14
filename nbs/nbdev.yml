@@ -5,5 +5,5 @@ website:
   title: "mslib"
   site-url: "https://markusschanta.github.io/mslib"
   description: "mslib"
-  repo-branch: main
+  repo-branch: master
   repo-url: "https://github.com/markusschanta/mslib"
