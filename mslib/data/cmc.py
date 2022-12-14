@@ -3,10 +3,15 @@
 # %% auto 0
 __all__ = ['get_coin_list']
 
-# %% ../../nbs/data/cmc.ipynb 3
+# %% ../../nbs/data/cmc.ipynb 2
+import json
+import time
+
+import pandas as pd
+import requests
+
 def get_coin_list():
     list_url = "https://s2.coinmarketcap.com/generated/search/quick_search.json"
     data = requests.get(list_url).json()
     coin_list = pd.DataFrame(data).set_index('rank').loc[:, ('slug', 'symbol', 'name')]
     return coin_list
-
