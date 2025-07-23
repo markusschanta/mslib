@@ -1,0 +1,64 @@
+[
+  {
+    "objectID": "data/cmc.html",
+    "href": "data/cmc.html",
+    "title": "cmc",
+    "section": "",
+    "text": "source\n\nget_coin_list\n\n get_coin_list ()\n\n\nget_coin_list()\n\n\n\n\n\n\n\n\nslug\nsymbol\nname\n\n\nrank\n\n\n\n\n\n\n\n1\nbitcoin\nBTC\nBitcoin\n\n\n2\nethereum\nETH\nEthereum\n\n\n3\ntether\nUSDT\nTether\n\n\n4\nxrp\nXRP\nXRP\n\n\n5\nbitcoin-cash\nBCH\nBitcoin Cash\n\n\n...\n...\n...\n...\n\n\n6364\ne-money-coin\nNMG\ne-Money\n\n\n6365\narth\nARTH\nARTH\n\n\n6366\ngolden-goose\nGOLD\nGolden Goose\n\n\n6367\nkoinos\nKOIN\nKoinos\n\n\n6368\nstaysbase\nSBS\nStaysBASE\n\n\n\n\n6368 rows × 3 columns\n\n\n\n\ndef get_market_data_single(slug, resample='d'):\n    market_data_url = \"https://graphs2.coinmarketcap.com/currencies/%s/\" % slug\n    print(\"Fetching market data for: %s\" % slug)\n    time.sleep(1.5)\n    data = requests.get(market_data_url).json()\n    market_data = pd.concat({k: pd.Series(dict(v)) for k, v in data.items()}, axis=1)\n    market_data.index = pd.to_datetime(list(market_data.index),unit='ms')\n    if resample:\n        market_data = market_data.resample(resample).last()\n    return market_data\n\ndef get_market_data(slugs=None, n=10):\n    if slugs != None:\n        n = len(slugs)\n    else:\n        slugs = get_coin_list().slug.iloc[:n]\n\n    market_data = {c: get_market_data_single(c) for c in slugs}\n    market_data = pd.concat(market_data, axis=1, names=['slug', 'metric'])\n    return market_data",
+    "crumbs": [
+      "data",
+      "cmc"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "mslib",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "mslib"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "mslib",
+    "section": "Install",
+    "text": "Install\npip install mslib",
+    "crumbs": [
+      "mslib"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "mslib",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "mslib"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()",
+    "crumbs": [
+      "core"
+    ]
+  },
+  {
+    "objectID": "data/te.html",
+    "href": "data/te.html",
+    "title": "te",
+    "section": "",
+    "text": "source\n\nget_data\n\n get_data (ticker)\n\n\nget_data('spx:ind')\n\n\n\n\n\n\n\n\nclose\n\n\ndate\n\n\n\n\n\n1928-01-03\n17.57000\n\n\n1928-02-01\n17.26000\n\n\n1928-03-01\n19.13000\n\n\n1928-04-02\n19.75000\n\n\n1928-05-01\n20.00000\n\n\n...\n...\n\n\n2022-08-01\n3955.00000\n\n\n2022-09-01\n3585.62000\n\n\n2022-10-03\n3871.98000\n\n\n2022-11-01\n4080.11000\n\n\n2022-12-01\n4047.02002\n\n\n\n\n1140 rows × 1 columns\n\n\n\n\nget_data('spx:ind').plot()\n\n\n\n\n\n\n\n\n\n# s='foo:ind'\n# auth_url='/spx:ind'\n\n# auth_token =_get_auth_token(auth_url)\n# df = _get_data(s, auth_url, auth_token)\n\n# df.date",
+    "crumbs": [
+      "data",
+      "te"
+    ]
+  }
+]
